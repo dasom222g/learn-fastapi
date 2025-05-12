@@ -3,18 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>학생 등록 페이지</title>
+    <title>학생 로그인 페이지</title>
   </head>
   <body>
-    <h1>학생 등록</h1>
-    <form action="register" method="post">
-      <p><input type="text" placeholder="학생 이름" name="sname" required /></p>
+    <h1>학생 로그인</h1>
+    <form action="sign-in" method="post">
       <p><input type="text" placeholder="학생 ID" name="s_id" required /></p>
       <p>
         <input type="text" placeholder="학생 Password" name="s_pwd" required />
       </p>
-      <p><input type="email" placeholder="학생 Email" name="email" /></p>
       <p><input type="submit" value="제출" /></p>
     </form>
+    <p>{{message}}</p>
   </body>
 </html>

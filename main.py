@@ -31,11 +31,27 @@ def get_register(request: Request, sname: Annotated[str, Form()], s_id: Annotate
   # DB에 추가
   db_connection.execute(f"insert into student(sname, s_id, s_pwd, email) values('{sname}', '{s_id}', '{s_pwd}', '{email}')")
 
-  get_query = db_connection.execute('select sname, sname, s_pwd, email from student')
-  result_list = get_query.fetchall()
-  print('result_list', result_list)
+  return templates.TemplateResponse('login.html', {'request': request})
 
-#   return templates.TemplateResponse('student.html', {'request': request, 'result_list': result_list})
+@app.get('/login')
+def getLogin(request: Request):
+  return templates.TemplateResponse('login.html', {'request': request, 'message': ''})
+
+@app.post('/sign-in')
+def postSignIn(request: Request, s_id: Annotated[str, Form()], s_pwd: Annotated[str, Form()]):
+  get_query = db_connection.execute(f"select sname from student where s_id='{s_id}' and s_pwd like '{s_pwd}'")
+  result = get_query.fetchall() # 빈 list or 튜플로 이루어진 리스트
+  print('result_list', result)
+  
+  message = ''
+  if len(result) > 0:
+    name = result[0][0]
+    message = f'{name}님 반갑습니다!'
+  else:
+    message = '존재하지 않는 회원입니다.'
+  
+  return templates.TemplateResponse('login.html', {'request': request, 'message': message}) 
+
 
 
 if __name__ == '__main__':
