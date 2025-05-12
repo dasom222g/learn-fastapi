@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원관리</title>
+    <style>
+      table,
+      tr,
+      th,
+      td {
+        border: 1px solid #000;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 8px 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <th>선수 id</th>
+        <th>선수 이름</th>
+        <th></th>
+      </tr>
+      <!-- 반복 시킬 row -->
+      {% for item in result_list%}
+      <tr>
+        <td>{{item.player_id}}</td>
+        <td>{{item.player_name}}</td>
+        <td>
+          <button
+            type="button"
+            onClick="location.href='/detail?id={{item.player_id}}&name={{item.player_name}}'"
+          >
+            상세 정보
+          </button>
+        </td>
+      </tr>
+      {% endfor %}
+      <!-- // 반복 시킬 row -->
+    </table>
+    <script>
+      const result_list = JSON.parse(`{{ result_list | tojson | safe }}`);
+      console.log("result_list", result_list);
+    </script>
+  </body>
+</html>
