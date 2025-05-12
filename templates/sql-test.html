@@ -24,6 +24,7 @@
         <th>선수 id</th>
         <th>선수 이름</th>
         <th></th>
+        <th></th>
       </tr>
       <!-- 반복 시킬 row -->
       {% for item in result_list%}
@@ -36,6 +37,14 @@
             onClick="location.href='/detail?id={{item.player_id}}&name={{item.player_name}}'"
           >
             상세 정보
+          </button>
+        </td>
+        <td>
+          <button
+            type="button"
+            onClick="location.href='/delete?id={{item.player_id}}&name={{item.player_name}}'"
+          >
+            삭제
           </button>
         </td>
       </tr>

@@ -20,40 +20,24 @@ result = query.fetchall() # 모든 결과 행을 한 번에 가져와 튜플 리
 # for data in result:
 #   print('data', data)
 
-@app.get('/mysqltest')
-def mysqltest(request: Request):
-  query = db_connection.execute('select * from player')
-  result_db = query.fetchall()
 
-  result = []
-  for data in result_db:
-    item = {'player_id': data[0], 'player_name': data[1]}
-    result.append(item)
+@app.get('/register')
+def get_register(request: Request):
+  return templates.TemplateResponse('register.html', {'request': request})
 
-  return templates.TemplateResponse('sql-test.html', {'request': request, 'result_list': result})
+@app.post('/register')
+def get_register(request: Request, sname: Annotated[str, Form()], s_id: Annotated[str, Form()], s_pwd: Annotated[str, Form()], email: Annotated[str, Form()]):
+  print(f'sname: {sname} s_id: {s_id} s_pwd: {s_pwd}, email: {email}')
+  # DB에 추가
+  db_connection.execute(f"insert into student(sname, s_id, s_pwd, email) values('{sname}', '{s_id}', '{s_pwd}', '{email}')")
 
-# 쿼리 방식
-@app.get('/detail')
-def test_post(request: Request, id: str, name: str):
-    print(id, name)
-    # SQL Injection 방지를 위해 바인딩 처리
-    # select * from player where player_name like '_준'; 
-    query = db_connection.execute("SELECT * FROM player WHERE player_id={} and player_name like '%{}%'".format(id, name))
-    result_db = query.fetchall()
-    result = []
-    for i in result_db:
-        temp = {
-            'player_id': i[0],
-            'player_name': i[1],
-            'team_name': i[2],
-            'height': i[-2],
-            'weight': i[-1]
-        }
-        result.append(temp)
-    return templates.TemplateResponse("detail.html", {"request": request, "result_list": result})
+  get_query = db_connection.execute('select sname, sname, s_pwd, email from student')
+  result_list = get_query.fetchall()
+  print('result_list', result_list)
+
+#   return templates.TemplateResponse('student.html', {'request': request, 'result_list': result_list})
 
 
 if __name__ == '__main__':
   print('서버on')
   uvicorn.run(app, host='localhost', port=8080)
-  
