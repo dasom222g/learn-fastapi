@@ -3,14 +3,69 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>POST 페이지</title>
+    <title>Login Page</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #b3e5fc; /* 연한 파란 배경 */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .login-box {
+        background-color: #b3e5fc;
+        padding: 40px;
+        border-radius: 10px;
+        width: 300px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      h2 {
+        margin-bottom: 20px;
+        color: #000;
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 15px;
+        border: 1px solid #888;
+        border-radius: 10px;
+        font-size: 16px;
+        box-sizing: border-box;
+      }
+
+      input[type="submit"] {
+        width: 100%;
+        padding: 15px;
+        background-color: #2979ff;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #1565c0;
+      }
+    </style>
   </head>
   <body>
-    <h1>POST 페이지</h1>
-    <form action="/test_post" method="post">
-      <p>이름: <input type="text" name="name" /></p>
-      <p>비밀번호: <input type="password" name="pwd" /></p>
-      <p><input type="submit" value="제출" /></p>
-    </form>
+    <div class="login-box">
+      <h2>Login Details</h2>
+      <form action="/test_post" method="post">
+        <input type="text" name="name" placeholder="ID" />
+        <input type="password" name="pwd" placeholder="Password" />
+        <input type="submit" value="Login" />
+      </form>
+    </div>
   </body>
 </html>

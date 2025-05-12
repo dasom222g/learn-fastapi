@@ -1,11 +1,13 @@
 from typing import Annotated
+import uvicorn
 from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
-import uvicorn
+from fastapi.staticfiles import StaticFiles
 
 # FastAPI클래스로 웹 객체(인스턴스) 만듬
 templates = Jinja2Templates(directory="templates")
 app = FastAPI() # 클랙스
+app.mount('static', StaticFiles(directory='static'), name='static')
 
 
 # 웹 객체에 path넣어주면 아래 함수 실행됨
