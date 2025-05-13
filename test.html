@@ -1,0 +1,27 @@
+<html>
+  <script>
+    $.ajax({
+      url: "url",
+      type: "GET",
+      async: true,
+      cache: true,
+      timeout: 3000,
+      data: { key: value },
+      processData: true,
+      contentType: "appication/json",
+      dataType: "json",
+      beforeSend: () => {
+        // HTTP Request 하기전 호출
+      },
+      success: (data, status, xhr) => {
+        // 정상적으로 응답 받았을경우 호출되며 응답 바디, 응답코드, xhr헤더를 받음
+      },
+      error: (xhr, status, error) => {
+        // 응답을 받지 못하였거나 정상적인 데이터 형식이 아닌경우 호출
+      },
+      complete: () => {
+        // success와 error콜백이 호출된 후에 무조건 호출(finally와 같은 역할)
+      },
+    });
+  </script>
+</html>

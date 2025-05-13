@@ -52,6 +52,20 @@ def postSignIn(request: Request, s_id: Annotated[str, Form()], s_pwd: Annotated[
   
   return templates.TemplateResponse('login.html', {'request': request, 'message': message}) 
 
+# 비동기처리
+@app.get('/jquery_test_get') # 페이지 보여주기
+def jquery_get(request: Request):
+   return templates.TemplateResponse('Jquery.html', {'request': request}) 
+
+@app.post('/jquery_post')
+def jquery_post(TextID: str = Form(...)):
+  print(f'TextID: {TextID}')
+  data = {
+    'message': '처리완료',
+    'TextID': TextID
+  }
+  return data
+
 
 
 if __name__ == '__main__':
